@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <section className="flex flex-col gap-8 items-center justify-center h-[calc(100vh_-_80px)] max-w-[800px] m-auto">
@@ -15,3 +16,5 @@ export default function Home() {
     </section>
   );
 }
+
+
