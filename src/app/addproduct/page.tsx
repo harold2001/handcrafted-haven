@@ -28,10 +28,13 @@ export default function AddProductPage() {
           </select>
         </div>
 
-     
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-600 ">
-          Create Product
-        </button>
+        <button 
+            type="submit" 
+            className="w-full bg-[#2980B9] text-white py-2 rounded-xl hover:bg-[#1F6690] transition-colors duration-300"
+          >
+  Create Product
+</button>
+
       </form>
     </section>
   );
