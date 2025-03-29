@@ -12,7 +12,7 @@ export default function Home() {
         incidunt perspiciatis?
       </p>
       <button className='border border-[#2980B9] py-3 w-[150px] text-[#2980B9]'>Buy now</button>
-      <Image src='/random.jpg' width={800} height={800} alt='Random image' />
+      <Image src='/artesania.jpg' width={1000} height={1000} alt='Random image' />
     </section>
   );
 }
