@@ -20,7 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
+    async redirect() {
       return '/dashboard';
     },
   },
