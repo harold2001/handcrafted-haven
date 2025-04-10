@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { publicSans, inter } from '../ui/fonts/fonts';
 import './globals.css';
-import Navbar from '../ui/components/navbar';
+import Navbar from '../ui/components/Navbar';
+import ToastProvider from '@/ui/components/ToastProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className={`font-sans ${inter.variable} antialiased`}>
         <Navbar />
         {children}
+        <ToastProvider />
       </body>
     </html>
   );

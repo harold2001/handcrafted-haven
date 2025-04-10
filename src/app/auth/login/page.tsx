@@ -1,17 +1,42 @@
-import Form from 'next/form';
-import { signIn } from '@/config/auth';
-import CenteredSection from '@/ui/components/centeredSection';
+'use client';
 
-export default function page() {
+import { toast } from 'react-toastify';
+import CenteredSection from '@/ui/components/CenteredSection';
+import { loginAction } from '@/utils/actions';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const response = await loginAction(formData);
+
+      if (response.error) {
+        toast(response.error.message || 'Email or password incorrect', {
+          type: 'error',
+          autoClose: 3000,
+          theme: 'dark',
+          closeButton: true,
+        });
+      } else {
+        router.push('/dashboard');
+      }
+    } catch (e) {
+      toast('Email or password incorrect', {
+        type: 'error',
+        autoClose: 3000,
+        theme: 'dark',
+        closeButton: true,
+      });
+    }
+  };
+
   return (
     <CenteredSection>
-      <Form
-        className='card-container'
-        action={async formData => {
-          'use server';
-          await signIn('credentials', formData);
-        }}
-      >
+      <form className='card-container' onSubmit={handleSubmit}>
         <label htmlFor='email' className='form-label'>
           Email
           <input
@@ -34,7 +59,7 @@ export default function page() {
         <button type='submit' className='form-submit-btn'>
           Sign In
         </button>
-      </Form>
+      </form>
     </CenteredSection>
   );
 }

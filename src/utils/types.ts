@@ -10,9 +10,31 @@ export interface LoginCredentials {
   password: string;
 }
 
-export interface AuthenticatedUser {
+export interface AuthUser {
   id: string;
   name: string;
   email: string;
   role_id: number;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  role_id: number;
+}
+
+export type SignInResult = {
+  error?: string;
+} | null;
+
+export interface RegisterResponse {
+  user?: User;
+  errors?: {
+    email?: string[];
+    password?: string[];
+    name?: string[];
+    role_id?: string[];
+  };
 }

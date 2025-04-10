@@ -1,4 +1,4 @@
-import CenteredSection from '@/ui/components/centeredSection';
+import CenteredSection from '@/ui/components/CenteredSection';
 import Image from 'next/image';
 
 export default function Home() {
