@@ -46,7 +46,8 @@ export default function Page() {
           router.push('/dashboard');
         }
       }
-    } catch (error) {
+    } catch (e) {
+      console.log(e);
       toast('Unexpected error. Please try again.', {
         type: 'error',
         autoClose: 3000,

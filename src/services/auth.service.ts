@@ -79,7 +79,8 @@ export async function loginUser(
       email: user.email,
       role_id: user.role_id,
     };
-  } catch (error) {
+  } catch (e) {
+    console.log(e);
     throw new Error('Error while login');
   }
 }

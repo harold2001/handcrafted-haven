@@ -25,6 +25,7 @@ export default function LoginPage() {
         router.push('/dashboard');
       }
     } catch (e) {
+      console.log(e);
       toast('Email or password incorrect', {
         type: 'error',
         autoClose: 3000,
