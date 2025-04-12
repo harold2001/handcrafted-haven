@@ -3,6 +3,7 @@ export interface Product {
   price: number;
   description: string;
   category_id: number;
+  image_url: string;
 }
 
 export interface LoginCredentials {
@@ -39,7 +40,28 @@ export interface RegisterResponse {
   };
 }
 
-export interface Category {
-  category_id: string;
+export interface Role {
+  role_id: number;
   name: string;
+}
+
+export interface User {
+  user_id: number;
+  name: string;
+  role: Role;
+  email: string;
+}
+
+export interface Category {
+  category_id: number;
+  name: string;
+}
+
+export interface Product {
+  product_id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: Category;
+  user: User;
 }
