@@ -33,9 +33,16 @@ export default function Navbar() {
         >
           <ul className='flex gap-6 items-center justify-end border-b pb-2 md:order-2 md:p-0 md:border-none'>
             {session?.user ? (
-              <li>
-                <Link href='/dashboard'>{session?.user?.name}</Link>
-              </li>
+              <>
+                <li>
+                  <Link href='/dashboard'>{session?.user?.name}</Link>
+                </li>
+                <li>
+                  <Link href='/logout' className='text-red-300'>
+                    Logout
+                  </Link>
+                </li>
+              </>
             ) : (
               <>
                 <li>

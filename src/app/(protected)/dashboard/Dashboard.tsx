@@ -23,11 +23,14 @@ export default function Dashboard({ categories }: Props) {
 
   return (
     <Section>
-      <p>Select a category:</p>
-      <ul className='flex gap-4'>
+      <h2 className='text-xl mb-3'>Your products</h2>
+      <p className='text-sm mb-1'>Select a category:</p>
+      <ul className='flex  flex-wrap gap-4 mb-1'>
         {categories?.map(c => (
           <li
-            className='category-button'
+            className={`category-button ${
+              categoryId === c.category_id ? 'bg-primary text-text' : ''
+            }`}
             key={c.category_id}
             onClick={() => setCategoryId(c.category_id)}
           >
@@ -35,7 +38,7 @@ export default function Dashboard({ categories }: Props) {
           </li>
         ))}
       </ul>
-      <div className='flex flex-wrap justify-center items-center'>
+      <div className='flex flex-wrap justify-center items-center gap-6 py-4'>
         {products?.map(p => (
           <ProductCard key={p.product_id} product={p} />
         ))}

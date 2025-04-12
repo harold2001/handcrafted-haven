@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={publicSans.variable}>
-      <body className={`font-sans ${inter.variable} antialiased`}>
+      <body className={`font-sans ${inter.variable} antialiased overflow-auto`}>
         <SessionProvider>
           <Navbar />
           {children}
