@@ -4,8 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { inter } from '../fonts/fonts';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function Navbar() {
+  const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const heightMenu = menuOpen ? 'h-auto px-6' : 'h-0 p-0';
 
@@ -30,12 +32,20 @@ export default function Navbar() {
           className={`flex flex-col absolute top-[70px] right-0 left-0 h-max-[180px] bg-primary overflow-hidden transition-all ${heightMenu} md:static md:h-auto md:flex-row md:gap-6`}
         >
           <ul className='flex gap-6 items-center justify-end border-b pb-2 md:order-2 md:p-0 md:border-none'>
-            <li>
-              <Link href='/auth/login'>Login</Link>
-            </li>
-            <li>
-              <Link href='/auth/register'>Register</Link>
-            </li>
+            {session?.user ? (
+              <li>
+                <Link href='/dashboard'>{session?.user?.name}</Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link href='/auth/login'>Login</Link>
+                </li>
+                <li>
+                  <Link href='/auth/register'>Register</Link>
+                </li>
+              </>
+            )}
             <li>
               <Link href='/' className='flex gap-1'>
                 <Image

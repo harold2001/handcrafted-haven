@@ -38,3 +38,8 @@ export interface RegisterResponse {
     role_id?: string[];
   };
 }
+
+export interface Category {
+  category_id: string;
+  name: string;
+}
