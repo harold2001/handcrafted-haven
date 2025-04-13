@@ -15,7 +15,7 @@ export default function CenteredSection({
 
   return (
     <section
-      className={`flex flex-col gap-8 items-center h-[calc(100vh_-_70px)] max-w-[800px] max-h-[1200px] m-auto ${justify} ${className}`}
+      className={`flex flex-col gap-8 items-center h-[calc(100vh_-_70px)] max-w-[800px] max-h-[1200px] m-auto p-4 ${justify} ${className}`}
     >
       {children}
     </section>

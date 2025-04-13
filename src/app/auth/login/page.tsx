@@ -3,11 +3,9 @@
 import { toast } from 'react-toastify';
 import CenteredSection from '@/ui/components/CenteredSection';
 import { loginAction } from '@/utils/actions';
-import { useRouter } from 'next/navigation';
+import { getSession } from 'next-auth/react';
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
@@ -22,7 +20,25 @@ export default function LoginPage() {
           closeButton: true,
         });
       } else {
-        router.push('/dashboard');
+        toast('Succes! You will be redirected.', {
+          type: 'success',
+          autoClose: 3000,
+          theme: 'dark',
+          closeButton: true,
+        });
+        const session = await getSession();
+
+        if (session && session.user && session.user.role) {
+          const roleName = session.user.role.name.toLowerCase();
+
+          if (roleName === 'seller') {
+            window.location.href = '/dashboard';
+          } else if (roleName === 'customer') {
+            window.location.href = '/shop';
+          } else {
+            window.location.href = '/';
+          }
+        }
       }
     } catch (e) {
       console.log(e);

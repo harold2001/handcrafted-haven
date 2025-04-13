@@ -4,7 +4,6 @@ import CenteredSection from '@/ui/components/CenteredSection';
 import { registerUser } from '@/services/auth.service';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { loginAction } from '@/utils/actions';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
@@ -32,19 +31,13 @@ export default function Page() {
         });
       } else {
         setErrors(null);
-        toast(
-          'Registration successful. You will be redirected to your dashboard',
-          {
-            type: 'success',
-            autoClose: 3000,
-            theme: 'dark',
-            closeButton: true,
-          }
-        );
-        const response = await loginAction(formData);
-        if (response) {
-          router.push('/dashboard');
-        }
+        toast('Succes! You need to login.', {
+          type: 'success',
+          autoClose: 3000,
+          theme: 'dark',
+          closeButton: true,
+        });
+        router.push('/auth/login');
       }
     } catch (e) {
       console.log(e);
@@ -132,7 +125,7 @@ export default function Page() {
         </label>
 
         <button type='submit' className='form-submit-btn'>
-          Registrarse
+          Sign up
         </button>
       </form>
     </CenteredSection>

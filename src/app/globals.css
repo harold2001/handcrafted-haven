@@ -54,5 +54,5 @@ body {
 }
 
 .category-button {
-  @apply border border-gray-300 rounded-sm p-2 cursor-pointer;
+  @apply border border-gray-300 p-2 cursor-pointer;
 }

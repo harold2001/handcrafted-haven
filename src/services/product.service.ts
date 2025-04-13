@@ -1,6 +1,7 @@
 import supabase from '@/config/supabaseClient';
 
-export async function getProductsWithRelationsByCategoryId(
+export async function getProductsByCategoryAndUserId(
+  userId: string | undefined,
   categoryId?: number | null
 ) {
   const query = `
@@ -23,7 +24,12 @@ export async function getProductsWithRelationsByCategoryId(
         .from('products')
         .select(query)
         .eq('category_id', categoryId)
-    : await supabase.from('products').select(query).limit(20);
+        .eq('user_id', Number(userId))
+    : await supabase
+        .from('products')
+        .select(query)
+        .eq('user_id', Number(userId))
+        .limit(20);
 
   return data;
 }

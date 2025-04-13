@@ -4,12 +4,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { inter } from '../fonts/fonts';
 import { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const heightMenu = menuOpen ? 'h-auto px-6' : 'h-0 p-0';
+
+  console.log('session', session);
+  console.log('status', status);
 
   return (
     <nav
@@ -19,6 +22,25 @@ export default function Navbar() {
         <Link href='/' className='text-2xl'>
           Handcrafted Haven
         </Link>
+        <ul className='hidden md:flex md:gap-6'>
+          <li className='border-b py-2 md:border-none'>
+            <Link href='/'>Shop</Link>
+          </li>
+          <li className='border-b py-2 md:border-none'>
+            <Link href='/'>About</Link>
+          </li>
+          <li className='py-2'>
+            <Link href='/' className='flex gap-1'>
+              <Image
+                src='/search.svg'
+                width={18}
+                height={18}
+                alt='Search button'
+              />{' '}
+              Search
+            </Link>
+          </li>
+        </ul>
         <button className='md:hidden' onClick={() => setMenuOpen(!menuOpen)}>
           <Image
             src='/hamburger.svg'
@@ -29,18 +51,32 @@ export default function Navbar() {
           />
         </button>
         <div
-          className={`flex flex-col absolute top-[70px] right-0 left-0 h-max-[180px] bg-primary overflow-hidden transition-all ${heightMenu} md:static md:h-auto md:flex-row md:gap-6`}
+          className={`flex flex-col absolute top-[70px] right-0 left-0 h-max-[180px] bg-primary overflow-hidden transition-all ${heightMenu} md:static md:h-auto md:flex-row `}
         >
           <ul className='flex gap-6 items-center justify-end border-b pb-2 md:order-2 md:p-0 md:border-none'>
-            {session?.user ? (
+            <li>
+              <Link href='/' className='flex gap-1'>
+                <Image
+                  src='/bag.svg'
+                  width={18}
+                  height={18}
+                  alt='Search button'
+                />{' '}
+                3
+              </Link>
+            </li>
+            {status === 'loading' ? null : session?.user ? (
               <>
                 <li>
-                  <Link href='/dashboard'>{session?.user?.name}</Link>
+                  <Link href='/dashboard'>{session.user.name}</Link>
                 </li>
                 <li>
-                  <Link href='/logout' className='text-red-300'>
+                  <button
+                    className='text-red-300 cursor-pointer'
+                    onClick={() => signOut()}
+                  >
                     Logout
-                  </Link>
+                  </button>
                 </li>
               </>
             ) : (
@@ -53,20 +89,9 @@ export default function Navbar() {
                 </li>
               </>
             )}
-            <li>
-              <Link href='/' className='flex gap-1'>
-                <Image
-                  src='/bag.svg'
-                  width={18}
-                  height={18}
-                  alt='Search button'
-                />{' '}
-                3
-              </Link>
-            </li>
           </ul>
 
-          <ul className='md:flex md:gap-6 md:order-1'>
+          <ul className='md:hidden'>
             <li className='border-b py-2 md:border-none'>
               <Link href='/'>Shop</Link>
             </li>

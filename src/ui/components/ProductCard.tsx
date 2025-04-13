@@ -11,7 +11,7 @@ export default function ProductCard({ product }: Props) {
   return (
     <Link
       href={`/products/${product.product_id}`}
-      className='h-auto w-[200px] border border-gray-300 rounded-sm cursor-pointer overflow-hidden'
+      className='h-auto w-[220px] border border-gray-300 cursor-pointer overflow-hidden'
     >
       <Image
         src={product.image_url}
@@ -19,7 +19,7 @@ export default function ProductCard({ product }: Props) {
         width={250}
         height={100}
         unoptimized
-        className='h-[160px] w-[200px] object-cover'
+        className='h-[180px] w-[220px] object-cover'
       />
       <div className='flex flex-col justify-around p-1'>
         <span className='font-semibold'>{product.name}</span>
