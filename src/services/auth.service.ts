@@ -1,12 +1,8 @@
 import supabase from '@/config/supabaseClient';
 import { loginUserSchema, registerUserSchema } from '@/lib/schemas';
-import {
-  User,
-  LoginCredentials,
-  AuthUser,
-  RegisterResponse,
-} from '@/utils/types';
+import { LoginCredentials, RegisterResponse, Role } from '@/utils/types';
 import bcrypt from 'bcryptjs';
+import { User } from 'next-auth';
 
 export async function registerUser(
   formData: FormData
@@ -50,20 +46,29 @@ export async function registerUser(
   return { user: users[0] };
 }
 
-export async function loginUser(
-  credentials: LoginCredentials
-): Promise<AuthUser | null> {
+export async function loginUser(credentials: LoginCredentials): Promise<User> {
   try {
     const validatedCredentials = loginUserSchema.parse(credentials);
     const { email, password } = validatedCredentials;
 
     const { data, error } = await supabase
       .from('users')
-      .select('*')
+      .select(
+        `
+        user_id,
+        name,
+        roles!inner (
+          role_id,
+          name
+        ),
+        email,
+        password
+        `
+      )
       .eq('email', email)
       .single();
 
-    const user = data as User;
+    const user = data;
 
     if (error || !user) {
       throw new Error('Error while login');
@@ -74,10 +79,10 @@ export async function loginUser(
     }
 
     return {
-      id: user.id,
+      id: user.user_id,
       name: user.name,
       email: user.email,
-      role_id: user.role_id,
+      role: user.roles as unknown as Role,
     };
   } catch (e) {
     console.log(e);

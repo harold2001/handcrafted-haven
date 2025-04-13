@@ -11,7 +11,7 @@ export default function Home() {
         consequuntur voluptatem quaerat iure facere aliquam? Vel quidem dolorum
         incidunt perspiciatis?
       </p>
-      <button className='border border-[#2980B9] py-3 w-[150px] text-[#2980B9]'>
+      <button className='border border-[#2980B9] py-3 w-[150px] text-[#2980B9] hover:bg-primary hover:text-text cursor-pointer'>
         Buy now
       </button>
       <Image src='/artesania.jpg' width={500} height={500} alt='Random image' />

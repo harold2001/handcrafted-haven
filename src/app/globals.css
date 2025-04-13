@@ -34,7 +34,7 @@ body {
 }
 
 .card-container {
-  @apply border border-gray-500 p-5 rounded-md flex flex-col gap-5 w-[calc(100vw_-_60px)] max-w-[550px];
+  @apply border border-gray-400 p-5 rounded-md flex flex-col gap-5 w-[calc(100vw_-_60px)] max-w-[550px];
 }
 
 .form-label {
@@ -54,5 +54,5 @@ body {
 }
 
 .category-button {
-  @apply border border-gray-400 rounded-sm p-2 cursor-pointer;
+  @apply border border-gray-300 p-2 cursor-pointer;
 }

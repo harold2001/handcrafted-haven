@@ -11,21 +11,6 @@ export interface LoginCredentials {
   password: string;
 }
 
-export interface AuthUser {
-  id: string;
-  name: string;
-  email: string;
-  role_id: number;
-}
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  role_id: number;
-}
-
 export type SignInResult = {
   error?: string;
 } | null;
@@ -48,8 +33,9 @@ export interface Role {
 export interface User {
   user_id: number;
   name: string;
-  role: Role;
+  roles: Role;
   email: string;
+  password: string;
 }
 
 export interface Category {

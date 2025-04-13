@@ -1,5 +1,6 @@
 import { Product } from '@/utils/types';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 interface Props {
@@ -7,17 +8,23 @@ interface Props {
 }
 
 export default function ProductCard({ product }: Props) {
-  console.log(product);
   return (
-    <div className='h-[150px] w-[250px] border border-gray-400 rounded-md'>
+    <Link
+      href={`/products/${product.product_id}`}
+      className='h-auto w-[220px] border border-gray-300 cursor-pointer overflow-hidden'
+    >
       <Image
         src={product.image_url}
         alt={product?.name}
         width={250}
         height={100}
         unoptimized
+        className='h-[180px] w-[220px] object-cover'
       />
-      <span>{product?.name}</span>
-    </div>
+      <div className='flex flex-col justify-around p-1'>
+        <span className='font-semibold'>{product.name}</span>
+        <span className='text-sm'>${product.price}</span>
+      </div>
+    </Link>
   );
 }
