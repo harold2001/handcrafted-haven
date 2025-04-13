@@ -4,107 +4,76 @@ import { Product } from '@/utils/types';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import supabase from 'supabaseClient';
+import Image from 'next/image';
+import CenteredSection from '@/ui/components/CenteredSection';
 
-export default function ProductPage() {
-  const { id } = useParams(); // Obtiene el ID de la URL
-  const [product, setProduct] = useState<Product>();
+export default function ProductDetail() {
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .eq('product_id', id)
-          .single(); // Esto asegura que solo obtenemos un producto
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('product_id', id)
+        .single();
 
-        if (error) {
-          console.error('Supabase error:', error.message); // Muestra el error de Supabase
-          setError(`Error fetching product: ${error.message}`);
-        } else {
-          if (!data) {
-            setError('Product not found');
-          } else {
-            setProduct(data);
-          }
-        }
-      } catch (err) {
-        console.error('Error fetching product:'); // Captura errores inesperados
-        // setError(`Unexpected error: ${err.message}`);
-        console.log(err);
+      if (error) {
+        setError('Error fetching product');
+        console.error(error);
+      } else {
+        setProduct(data);
       }
     };
 
     fetchProduct();
-  }, [id]); // Ejecuta esta función cuando el ID cambie
+  }, [id]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  if (error) return <div>Error: {error}</div>;
+  if (!product) return <div>Loading...</div>;
 
   return (
-    <section className='flex flex-col items-center justify-center min-h-screen pb-80'>
-      <h1 className='text-3xl font-bold mb-6'>Edit Product: {product.name}</h1>
-      <form className='w-full max-w-md bg-[#EFF2F6] shadow-xl rounded-2xl p-6'>
-        <div className='mb-4'>
-          <label className='block text-gray-700 font-bold mb-2'>
-            Product Name
-          </label>
-          <input
-            type='text'
-            className='w-full px-4 py-2 border rounded-xl'
-            placeholder='Enter product name'
-            defaultValue={product.name}
+    <CenteredSection>
+    <div className="flex flex-col md:flex-row gap-10 w-full max-w-6xl bg-[#EFF2F6] p-10 rounded-2xl shadow-2xl min-h-[600px]">
+      
+      {/* Imagen */}
+      <div className="w-full md:w-1/2 flex items-center justify-center">
+        <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-md">
+          <Image
+            src={product.image_url}
+            alt={product.name}
+            fill
+            unoptimized
+            className="object-cover"
           />
         </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700 font-bold mb-2'>
-            Description
-          </label>
-          <textarea
-            className='w-full px-4 py-2 border rounded-xl'
-            placeholder='Enter product description'
-            defaultValue={product.description}
-          ></textarea>
+      </div>
+  
+      {/* Detalles del producto */}
+      <div className="w-full md:w-1/2 flex flex-col justify-between">
+        {/* Detalles del producto arriba */}
+        <div>
+          <h1 className="text-4xl font-bold mb-4 text-gray-800">{product.name}</h1>
+          <p className="text-gray-600 mb-4 leading-relaxed text-lg">{product.description}</p>
+          <p className="text-3xl font-semibold text-[#2980B9] mb-6">${product.price}</p>
         </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700 font-bold mb-2'>Price</label>
-          <input
-            type='number'
-            className='w-full px-4 py-2 border rounded-xl'
-            placeholder='Enter price'
-            defaultValue={product.price}
-          />
-        </div>
-
-        <div className='mb-4'>
-          <label className='block text-gray-700 font-bold mb-2'>Category</label>
-          <select
-            className='w-full px-4 py-2 border rounded-xl'
-            defaultValue={product.category_id}
-          >
-            <option value='1'>Handmade</option>
-            <option value='2'>Art</option>
-            <option value='3'>Jewelry</option>
-          </select>
-        </div>
-
-        <div className='flex justify-center'>
-          <button
-            type='submit'
-            className='w-full bg-[#2980B9] text-white py-2 rounded-xl hover:bg-[#1F6690] transition-colors duration-300'
-          >
-            Save Changes
+  
+        {/* Botones debajo de los detalles */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+          <button className="w-full bg-[#2980B9] text-white py-3 rounded-2xl font-medium text-lg hover:bg-[#1F6690] transition duration-300 shadow">
+            Add to Cart
+          </button>
+          <button className="w-full bg-green-600 text-white py-3 rounded-2xl font-medium text-lg hover:bg-green-700 transition duration-300 shadow">
+            Buy Now
           </button>
         </div>
-      </form>
-    </section>
+      </div>
+    </div>
+  </CenteredSection>
+  
+
+  
   );
 }
