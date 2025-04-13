@@ -11,9 +11,6 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const heightMenu = menuOpen ? 'h-auto px-6' : 'h-0 p-0';
 
-  console.log('session', session);
-  console.log('status', status);
-
   return (
     <nav
       className={`w-screen px-6 h-[70px] bg-primary text-white ${inter.variable} relative`}
