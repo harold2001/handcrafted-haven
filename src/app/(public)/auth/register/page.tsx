@@ -62,12 +62,11 @@ export default function Page() {
             placeholder='Ej. John Doe'
             className='form-input'
           />
-          {errors?.name &&
-            errors.name.map((err, index) => (
-              <span key={index} className='text-sm text-red-600 font-semibold'>
-                {err}
-              </span>
-            ))}
+          {errors?.name?.map((err, index) => (
+            <span key={index} className='error-text'>
+              {err}
+            </span>
+          ))}
         </label>
 
         <label className='form-label'>
@@ -79,12 +78,11 @@ export default function Page() {
             placeholder='E.g. jhondoe@example.com'
             className='form-input'
           />
-          {errors?.email &&
-            errors.email.map((err, index) => (
-              <span key={index} className='text-sm text-red-600 font-semibold'>
-                {err}
-              </span>
-            ))}
+          {errors?.email?.map((err, index) => (
+            <span key={index} className='error-text'>
+              {err}
+            </span>
+          ))}
         </label>
 
         <label className='form-label'>
@@ -95,12 +93,11 @@ export default function Page() {
             type='password'
             className='form-input'
           />
-          {errors?.password &&
-            errors.password.map((err, index) => (
-              <span key={index} className='text-sm text-red-600 font-semibold'>
-                {err}
-              </span>
-            ))}
+          {errors?.password?.map((err, index) => (
+            <span key={index} className='error-text'>
+              {err}
+            </span>
+          ))}
         </label>
 
         <label className='form-label'>
@@ -116,12 +113,11 @@ export default function Page() {
             <option value={2}>Buy</option>
             <option value={3}>Sell</option>
           </select>
-          {errors?.role_id &&
-            errors.role_id.map((err, index) => (
-              <span key={index} className='text-sm text-red-600 font-semibold'>
-                {err}
-              </span>
-            ))}
+          {errors?.role_id?.map((err, index) => (
+            <span key={index} className='error-text'>
+              {err}
+            </span>
+          ))}
         </label>
 
         <button type='submit' className='form-submit-btn'>

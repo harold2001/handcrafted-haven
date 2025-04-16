@@ -34,7 +34,11 @@ body {
 }
 
 .card-container {
-  @apply border border-gray-400 p-5 rounded-md flex flex-col gap-5 w-[calc(100vw_-_60px)] max-w-[550px];
+  @apply border border-gray-200 p-5 rounded-md flex flex-col gap-5 w-[calc(100vw_-_60px)] max-w-[550px] shadow-xl;
+}
+
+.card-container-normal {
+  @apply border border-gray-200 p-5 rounded-md w-[calc(100vw_-_60px)] max-w-[550px] shadow-xl;
 }
 
 .form-label {
@@ -50,9 +54,33 @@ body {
 }
 
 .form-submit-btn {
-  @apply px-6 py-2 bg-primary cursor-pointer text-text rounded-md self-center;
+  @apply px-6 py-2 bg-primary cursor-pointer text-text rounded-sm self-center;
 }
 
 .category-button {
-  @apply border border-gray-300 p-2 cursor-pointer;
+  @apply border border-gray-300 p-2 cursor-pointer rounded-sm;
+}
+
+.subtitle {
+  @apply mb-3;
+}
+
+.title {
+  @apply text-2xl mb-3;
+}
+
+.error-text {
+  @apply text-sm text-red-600 font-semibold;
+}
+
+.btn-primary {
+  @apply px-4 py-2 bg-primary cursor-pointer text-text rounded-sm hover:bg-blue-500 transition duration-200;
+}
+
+.btn-success {
+  @apply px-4 py-2 bg-emerald-600 cursor-pointer text-text rounded-sm hover:bg-emerald-900 transition duration-200;
+}
+
+.btn-danger {
+  @apply px-4 py-2 bg-red-400 cursor-pointer text-text rounded-sm hover:bg-red-700 transition duration-200;
 }

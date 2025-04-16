@@ -1,5 +1,6 @@
 import CenteredSection from '@/ui/components/CenteredSection';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -11,9 +12,12 @@ export default function Home() {
         consequuntur voluptatem quaerat iure facere aliquam? Vel quidem dolorum
         incidunt perspiciatis?
       </p>
-      <button className='border border-[#2980B9] py-3 w-[150px] text-[#2980B9] hover:bg-primary hover:text-text cursor-pointer'>
+      <Link
+        href='/shop'
+        className='border border-[#2980B9] py-3 w-[150px] text-[#2980B9] hover:bg-primary hover:text-text cursor-pointer text-center'
+      >
         Buy now
-      </button>
+      </Link>
       <Image src='/artesania.jpg' width={500} height={500} alt='Random image' />
     </CenteredSection>
   );

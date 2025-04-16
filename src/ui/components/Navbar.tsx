@@ -21,7 +21,7 @@ export default function Navbar() {
         </Link>
         <ul className='hidden md:flex md:gap-6'>
           <li className='border-b py-2 md:border-none'>
-            <Link href='/'>Shop</Link>
+            <Link href='/shop'>Shop</Link>
           </li>
           <li className='border-b py-2 md:border-none'>
             <Link href='/'>About</Link>
@@ -90,7 +90,7 @@ export default function Navbar() {
 
           <ul className='md:hidden'>
             <li className='border-b py-2 md:border-none'>
-              <Link href='/'>Shop</Link>
+              <Link href='/shop'>Shop</Link>
             </li>
             <li className='border-b py-2 md:border-none'>
               <Link href='/'>About</Link>

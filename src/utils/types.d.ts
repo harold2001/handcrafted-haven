@@ -4,6 +4,10 @@ export interface Product {
   description: string;
   category_id: number;
   image_url: string;
+  categories: {
+    category_id: number,
+    name: string
+  }
 }
 
 export interface LoginCredentials {
@@ -49,5 +53,6 @@ export interface Product {
   description: string;
   price: number;
   category: Category;
+  image_url: string;
   user: User;
 }

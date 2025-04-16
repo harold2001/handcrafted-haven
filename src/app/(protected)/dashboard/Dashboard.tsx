@@ -29,10 +29,14 @@ export default function Dashboard({ categories, user }: Props) {
 
   return (
     <Section>
-      <h2 className='text-xl mb-3'>Your products</h2>
+      <div className='flex justify-between'>
+        <h1 className='title'>Your products</h1>
+        <Link href='/products/create' className='btn-primary'>
+          Create product
+        </Link>
+      </div>
       {products?.length > 0 ? (
         <>
-          {' '}
           <p className='text-sm mb-1'>Select a category:</p>
           <ul className='flex  flex-wrap gap-4 mb-1'>
             {categories?.map(c => (
@@ -54,15 +58,9 @@ export default function Dashboard({ categories, user }: Props) {
           </div>
         </>
       ) : (
-        <>
-          {' '}
-          <div className='flex flex-col gap-5 justify-center items-center'>
-            <p>There are no products in your list.</p>
-            <Link href='/products/create' className='bg-primary text-text p-2'>
-              Create product
-            </Link>
-          </div>
-        </>
+        <div className='flex flex-col gap-5 justify-center items-center'>
+          <p>There are no products in your list.</p>
+        </div>
       )}
     </Section>
   );
