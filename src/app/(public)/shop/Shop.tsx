@@ -1,7 +1,6 @@
 'use client';
 
 import { getProductsByCategoriesIds } from '@/services/product.service';
-import CenteredSection from '@/ui/components/CenteredSection';
 import ProductCard from '@/ui/components/ProductCard';
 import Section from '@/ui/components/Section';
 import { Category, Product } from '@/utils/types';
@@ -32,7 +31,7 @@ export default function Shop({ initialProducts, categories }: Props) {
       setProducts(data as Product[] | []);
     }
     getData();
-  }, [categoriesSelected, setProducts, getProductsByCategoriesIds]);
+  }, [categoriesSelected, setProducts]);
 
   return (
     <Section className='flex flex-row gap-8 items-start'>
